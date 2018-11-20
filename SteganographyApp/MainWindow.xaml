@@ -8,21 +8,53 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Height="600" Width="1024" WindowStyle="None" ResizeMode="NoResize">
 
-    <Grid Background="#FFEEEEEE" MouseDown="Grid_MouseDown">
-        <Grid Width="250" HorizontalAlignment="Left" Background="#FF222222">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="2*" />
-                <RowDefinition Height="10*" />
-                <RowDefinition Height="1*" />
-            </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="1"></StackPanel>
-            <ListView Grid.Row="2"></ListView>
-            <StackPanel Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
-                <TextBlock Text="Bartosz Ptak" Foreground="LightGray" FontFamily="Champagne &amp; Limousines" FontSize="18"/>
-                <Button Width="30" Margin="10 -15" Height="45" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="LightGray" FontFamily="Champagne &amp; Limousines" FontSize="18">
-                    <materialDesign:PackIcon Kind="GithubBox" Height="28" Width="28"/>
-                </Button>
+
+    <Grid Background="#FFEEEEEE" MouseDown="Grid_MouseDown">
+
+        <Grid Margin="250 0 0 0">
+            <Grid x:Name="GridPrincipal" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+
+        <Grid Width="250" HorizontalAlignment="Left" Background="#00653B">
+            <StackPanel Margin="20 10">
+                <TextBlock  Foreground="Goldenrod" FontFamily="Champagne &amp; Limousines" FontSize="30">Steganography</TextBlock>
+                <TextBlock  Foreground="Goldenrod" FontFamily="Champagne &amp; Limousines" FontSize="32">App</TextBlock>
+            </StackPanel>
+
+            <materialDesign:TransitioningContent x:Name="contet_slide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.2}" Margin="0,0,0,55">
+                <Grid x:Name="cursor_grid" Margin="0 100 0 0" Background="Goldenrod" Width="10" HorizontalAlignment="Left" Height="60" VerticalAlignment="Top"/>
+            </materialDesign:TransitioningContent>
+
+            <ListView x:Name="menu_list_view" Margin="0 100" Foreground="White" FontFamily="Champagne &amp; Limousines" FontSize="18" SelectionChanged="Menu_list_view_SelectionChanged" SelectedIndex="0">
+                <ListViewItem Height="60">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Home" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
+                        <TextBlock Text="Home" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem Height="60">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Information" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
+                        <TextBlock Text="Info" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem Height="60">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="ExitToApp" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
+                        <TextBlock Text="Exit" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
+                    </StackPanel>
+                </ListViewItem>
+
+            </ListView>
+
+            <StackPanel Margin="10,555,10,10" HorizontalAlignment="Center" Orientation="Horizontal">
+                <TextBlock Foreground="LightGray" FontFamily="Champagne &amp; Limousines" FontSize="26">
+                    <TextBlock Margin="0 -8" Text="Bartosz Ptak" VerticalAlignment="Center" FontSize="20" FontFamily="Champagne &amp; Limousines"/>
+                    <Button x:Name="github_button" Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="LightGray" Click="Github_button_Click">
+                        <materialDesign:PackIcon Kind="GithubBox" Width="30" Height="30" />
+                    </Button>
+                </TextBlock>
             </StackPanel>
 
         </Grid>

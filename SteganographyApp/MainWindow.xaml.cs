@@ -30,5 +30,44 @@ namespace SteganographyApp
         {
             DragMove();
         }
+
+        private void Move_cursor_menu(int index)
+        {
+            //contet_slide.OnApplyTemplate();
+            cursor_grid.Margin = new Thickness(0, (100 + (60 * index)), 0, 0);
+        }
+
+
+
+        private void Menu_list_view_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int index = menu_list_view.SelectedIndex;
+            Move_cursor_menu(index);
+
+            switch (index)
+            {
+                case 0:
+                    GridPrincipal.Children.Clear();
+                    break;
+
+                case 1:
+                    GridPrincipal.Children.Clear();
+                    GridPrincipal.Children.Add(new Info_user_control());
+                    break;
+
+                case 2:
+                    Application.Current.Shutdown();
+                    break;
+
+                default:
+                    break;
+            }
+
+        }
+
+        private void Github_button_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://github.com/bartoszptak");
+        }
     }
 }
