@@ -5,10 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SteganographyApp"
         mc:Ignorable="d"
-        Height="450" Width="800" WindowStyle="None">
-    <Grid>
-        <Image x:Name="image_box" HorizontalAlignment="Left" Height="283" Margin="346,10,0,0" VerticalAlignment="Top" Width="436"/>
-        <Button x:Name="load_button" Content="Wczytaj" HorizontalAlignment="Left" Margin="284,342,0,0" VerticalAlignment="Top" Width="75" Click="Load_button_Click"/>
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Height="600" Width="1024" WindowStyle="None" ResizeMode="NoResize">
 
+    <Grid Background="#FFEEEEEE" MouseDown="Grid_MouseDown">
+        <Grid Width="250" HorizontalAlignment="Left" Background="#FF222222">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="10*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="1"></StackPanel>
+            <ListView Grid.Row="2"></ListView>
+            <StackPanel Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                <TextBlock Text="Bartosz Ptak" Foreground="LightGray" FontFamily="Champagne &amp; Limousines" FontSize="18"/>
+                <Button Width="30" Margin="10 -15" Height="45" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="LightGray" FontFamily="Champagne &amp; Limousines" FontSize="18">
+                    <materialDesign:PackIcon Kind="GithubBox" Height="28" Width="28"/>
+                </Button>
+            </StackPanel>
+
+        </Grid>
     </Grid>
 </Window>
