@@ -33,7 +33,6 @@ namespace SteganographyApp
 
         private void Move_cursor_menu(int index)
         {
-            //contet_slide.OnApplyTemplate();
             cursor_grid.Margin = new Thickness(0, (100 + (60 * index)), 0, 0);
         }
 
@@ -47,15 +46,25 @@ namespace SteganographyApp
             switch (index)
             {
                 case 0:
-                    GridPrincipal.Children.Clear();
+                    principal_grid.Children.Clear();
                     break;
 
                 case 1:
-                    GridPrincipal.Children.Clear();
-                    GridPrincipal.Children.Add(new Info_user_control());
+                    principal_grid.Children.Clear();
+                    principal_grid.Children.Add(new Text_user_control());
                     break;
 
                 case 2:
+                    principal_grid.Children.Clear();
+                    principal_grid.Children.Add(new Binary_user_control());
+                    break;
+
+                case 3:
+                    principal_grid.Children.Clear();
+                    principal_grid.Children.Add(new Info_user_control());
+                    break;
+
+                case 4:
                     Application.Current.Shutdown();
                     break;
 
