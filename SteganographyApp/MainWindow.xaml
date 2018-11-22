@@ -6,11 +6,11 @@
         xmlns:local="clr-namespace:SteganographyApp"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Height="600" Width="1024" WindowStyle="None" ResizeMode="NoResize">
+        Height="600" Width="1024" ResizeMode="CanMinimize">
 
 
 
-    <Grid Background="#FFEEEEEE" MouseDown="Grid_MouseDown">
+    <Grid Background="#FFEEEEEE">
 
         <Grid Margin="250 0 0 0">
             <Grid x:Name="principal_grid" HorizontalAlignment="Center" VerticalAlignment="Center"/>

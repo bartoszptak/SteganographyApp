@@ -5,64 +5,60 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SteganographyApp"
              mc:Ignorable="d"  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             Height="auto" Width="auto">
+             Height="600" Width="774">
     <Grid>
         <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.8}">
             <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0" Height="300" Background="#FFF3F3F3" Margin="10">
-                    <Grid.Effect>
-                        <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" ShadowDepth="1"/>
-                    </Grid.Effect>
 
-                    <StackPanel Width="200">
-                        <TextBlock Margin="10" FontFamily="Showcard Gothic" FontSize="12" Text="Calabresa" Foreground="#FFC00000"/>
-                        <Image Source="Assets/pizzabar.jpg" Width="200" Height="150" Stretch="UniformToFill" />
-                        <TextBlock FontSize="8" Margin="5" TextWrapping="Wrap" FontFamily="Champagne &amp; Limousines">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vitae est vel turpis hendrerit vulputate. In eleifend, nunc eu egestas.
-                        </TextBlock>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <TextBlock Text="R$ 25" VerticalAlignment="Center" Margin="10" FontSize="20" FontFamily="Champagne &amp; Limousines"/>
-                            <Button Width="100" Content="Leia Mais" FontFamily="Champagne &amp; Limousines" Margin="10"/>
-                        </StackPanel>
+                <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"  Height="40" Background="#00653B">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="5 0" HorizontalAlignment="Center" >
+                        <Button Uid="0" Width="382" Content="Some informations about this application" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Goldenrod"/>
                     </StackPanel>
                 </Grid>
-                <Grid Grid.Column="1" Height="300" Background="#FFF3F3F3" Margin="10">
+                
+                <Grid Grid.Row="1" Grid.Column="0" Height="500" Background="#FFF3F3F3" Margin="10">
                     <Grid.Effect>
-                        <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" ShadowDepth="1"/>
+                        <DropShadowEffect BlurRadius="20" Color="#00653B" ShadowDepth="1"/>
                     </Grid.Effect>
 
                     <StackPanel Width="200">
-                        <TextBlock Margin="10" FontFamily="Showcard Gothic" FontSize="12" Text="Queijo" Foreground="#FFC00000"/>
-                        <Image Source="Assets/size_960_16_9_pizza2.jpg" Width="200" Height="150" Stretch="UniformToFill" />
-                        <TextBlock FontSize="8" Margin="5" TextWrapping="Wrap" FontFamily="Champagne &amp; Limousines">
+                        <TextBlock Margin="10" FontFamily="Showcard Gothic" FontSize="18" Text="Info" Foreground="#00653B"/>
+                        <TextBlock FontSize="12" Margin="5" TextWrapping="Wrap" FontFamily="Champagne &amp; Limousines">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vitae est vel turpis hendrerit vulputate. In eleifend, nunc eu egestas.
                         </TextBlock>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <TextBlock Text="R$ 27" VerticalAlignment="Center" Margin="10" FontSize="20" FontFamily="Champagne &amp; Limousines"/>
-                            <Button Width="100" Content="Leia Mais" FontFamily="Champagne &amp; Limousines" Margin="10"/>
-                        </StackPanel>
                     </StackPanel>
                 </Grid>
-                <Grid Grid.Column="2" Height="300" Background="#FFF3F3F3" Margin="10">
+                <Grid Grid.Row="1"  Grid.Column="1" Height="500" Background="#FFF3F3F3" Margin="10">
                     <Grid.Effect>
-                        <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" ShadowDepth="1"/>
+                        <DropShadowEffect BlurRadius="20" Color="#00653B" ShadowDepth="1"/>
                     </Grid.Effect>
 
                     <StackPanel Width="200">
-                        <TextBlock Margin="10" FontFamily="Showcard Gothic" FontSize="12" Text="Brigadeiro" Foreground="#FFC00000"/>
-                        <Image Source="Assets/Pizza-doce-de-Brigadeiro.jpg" Width="200" Height="150" Stretch="UniformToFill" />
-                        <TextBlock FontSize="8" Margin="5" TextWrapping="Wrap" FontFamily="Champagne &amp; Limousines">
+                        <TextBlock Margin="10" FontFamily="Showcard Gothic" FontSize="18" Text="Algorithm" Foreground="#00653B"/>
+                        <TextBlock FontSize="12" Margin="5" TextWrapping="Wrap" FontFamily="Champagne &amp; Limousines">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vitae est vel turpis hendrerit vulputate. In eleifend, nunc eu egestas.
                         </TextBlock>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <TextBlock Text="R$ 28" VerticalAlignment="Center" Margin="10" FontSize="20" FontFamily="Champagne &amp; Limousines"/>
-                            <Button Width="100" Content="Leia Mais" FontFamily="Champagne &amp; Limousines" Margin="10"/>
-                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="1"  Grid.Column="2" Height="500" Background="#FFF3F3F3" Margin="10">
+                    <Grid.Effect>
+                        <DropShadowEffect BlurRadius="20" Color="#00653B" ShadowDepth="1"/>
+                    </Grid.Effect>
+
+                    <StackPanel Width="200">
+                        <TextBlock Margin="10" FontFamily="Showcard Gothic" FontSize="18" Text="Author" Foreground="#00653B"/>
+                        <TextBlock FontSize="12" Margin="5" TextWrapping="Wrap" FontFamily="Champagne &amp; Limousines">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vitae est vel turpis hendrerit vulputate. In eleifend, nunc eu egestas.
+                        </TextBlock>
                     </StackPanel>
                 </Grid>
             </Grid>

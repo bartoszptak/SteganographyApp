@@ -26,10 +26,6 @@ namespace SteganographyApp
             InitializeComponent();
         }
 
-        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
-        }
 
         private void Move_cursor_menu(int index)
         {
