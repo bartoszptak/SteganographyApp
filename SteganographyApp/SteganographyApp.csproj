@@ -71,6 +71,7 @@
     <Compile Include="Binary_user_control.xaml.cs">
       <DependentUpon>Binary_user_control.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LSB_method.cs" />
     <Compile Include="Text_decrypt_user_control.xaml.cs">
       <DependentUpon>Text_decrypt_user_control.xaml</DependentUpon>
     </Compile>
