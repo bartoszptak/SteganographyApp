@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -113,15 +115,13 @@ namespace SteganographyApp
             }
             engine.Encrypt_text(text_to_encrypt_textbox.Text);
 
-            image_result = engine.Save();
+            image_result = engine.Get_image();
             save_button.Visibility = Visibility.Visible;
 
-            // IF ALL OK
             Raise_success("Text encrypted in the image. Save it.");
-
         }
 
-        private void orientation_togglebutton_Click(object sender, RoutedEventArgs e)
+        private void Orientation_togglebutton_Click(object sender, RoutedEventArgs e)
         {
             if (orientation_label != null && orientation_togglebutton != null)
             {
@@ -136,16 +136,19 @@ namespace SteganographyApp
             }
         }
 
-        private void save_button_Click(object sender, RoutedEventArgs e)
+        private void Save_button_Click(object sender, RoutedEventArgs e)
         {
+            LSB_method.LSB_method engine = new LSB_method.LSB_method();
+
             SaveFileDialog dlg = new SaveFileDialog();
-            dlg.Filter = "Image files|*.bmp;*.png;*.jpg;*.png";
+            dlg.Filter = engine.Get_formats();
 
             var result = dlg.ShowDialog();
 
             if (result == true)
             {
-                image_result.Save(dlg.FileName);
+                engine.Save_in_path(image_result, dlg.FileName);
+
                 Raise_success("Save successful!");
             }
             else

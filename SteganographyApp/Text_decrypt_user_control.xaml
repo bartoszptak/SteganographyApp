@@ -4,27 +4,35 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SteganographyApp"
-             mc:Ignorable="d" 
-              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             Height="auto" Width="auto">
+                mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             Height="560" Width="774">
     <Grid>
         <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.8}">
             <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0" Height="300" Background="#FFF3F3F3" Margin="10">
+                <Grid Background="#FFF3F3F3" Margin="10">
                     <Grid.Effect>
                         <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" ShadowDepth="1"/>
                     </Grid.Effect>
 
-                    <StackPanel Width="200">
-                        <TextBlock Margin="10" FontFamily="Showcard Gothic" FontSize="20" Text="Deszyfrowanko" Foreground="#FFC00000"/>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <TextBlock Text="25$" VerticalAlignment="Center" Margin="10" FontSize="20" FontFamily="Champagne &amp; Limousines"/>
-                            <Button Width="100" Content="Odszyfruj" FontFamily="Champagne &amp; Limousines" Margin="10"/>
-                        </StackPanel>
+                    <StackPanel x:Name="image_drop_panel" Drop="Image_drop_panel_Drop" AllowDrop="true" MouseDown="Image_drop_panel_MouseDown" Margin="10,10,244,180">
+                        <Image x:Name="image_panel" Source="drop_image.png" Height="346"/>
                     </StackPanel>
+                    <TextBox x:Name="stop_words_textbox" Margin="515,202,10,286" BorderBrush="Goldenrod" materialDesign:HintAssist.Hint="Stop words (3 chars)" Foreground="#00653B" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" MaxLength="3"/>
+
+                    <Button x:Name="encrypt_button"  Margin="515,310,10,180" BorderBrush="Goldenrod" Background="#00653B" Content="Decrypt" Height="Auto" Click="Decrypt_button_Click"/>
+                    <ToggleButton x:Name="orientation_togglebutton" Margin="515,259,0,235" HorizontalAlignment="Left" IsChecked="True" Background="#00653B" BorderBrush="Goldenrod" Style="{StaticResource MaterialDesignSwitchToggleButton}" Click="Orientation_togglebutton_Click"  />
+                    <Label x:Name="orientation_label" Content="Horizontal" HorizontalAlignment="Left" Margin="554,259,0,0" Foreground="#00653B"  VerticalAlignment="Top" Height="46" Width="190" FontSize="24"/>
+                    <TextBox x:Name="text_decrypted_textbox" Margin="27,365,10,58" BorderBrush="Goldenrod" materialDesign:HintAssist.Hint="Decrypted text" Foreground="#00653B" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" AcceptsReturn="True" IsReadOnly="True"/>
+
+                    <Grid>
+                        <Grid.Effect>
+                            <DropShadowEffect BlurRadius="30" Color="Black" ShadowDepth="1"/>
+                        </Grid.Effect>
+                        <TextBox x:Name="error_texbox" Margin="10,10,10,470" Text="Error message" BorderBrush="DarkRed" Background="DarkRed" Foreground="WhiteSmoke" FontFamily="Champagne &amp; Limousines" FontSize="18" IsReadOnly="True" Padding="7" Visibility="Hidden"/>
+                    </Grid>
+                    
+
                 </Grid>
             </Grid>
         </materialDesign:TransitioningContent>
