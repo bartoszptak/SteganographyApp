@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.IO;
+using System.Drawing.Imaging;
 
 namespace LSB_method
 {
@@ -14,11 +16,18 @@ namespace LSB_method
         private long image_lenght;
         private readonly string stop_bytes;
         private readonly bool isHorizontal;
+        private readonly string formats = "Image files|*.bmp;*.png;*.jpg";
 
         public LSB_method(string stop, bool isHorizontal)
         {
             this.stop_bytes = stop;
             this.isHorizontal = isHorizontal;
+        }
+
+        public LSB_method()
+        {
+            stop_bytes = "<E>";
+            isHorizontal = true;
         }
 
         private byte[] Get_stop_bytes()
@@ -40,12 +49,35 @@ namespace LSB_method
             image_lenght = image.Width * image.Height;
         }
 
-        public void Save_in_path(string path)
+        public void Save_in_path(Bitmap image, string path)
         {
-            image.Save(path);
+            string[] path_array = path.Split('.');
+
+            string format = path_array[path_array.Length - 1].ToLower();
+
+            using (var ms = new MemoryStream())
+            {
+                if (format == "bmp")
+                {
+                    image.Save(ms, ImageFormat.Bmp);
+                }
+                else if (format == "png")
+                {
+                    image.Save(ms, ImageFormat.Png);
+                }
+                else if(format == "jpg")
+                {
+                    image.Save(ms, ImageFormat.Jpeg);
+                }
+            }
         }
 
-        public Bitmap Save()
+        public string Get_formats()
+        {
+            return formats;
+        }
+
+        public Bitmap Get_image()
         {
             return image;
         }
