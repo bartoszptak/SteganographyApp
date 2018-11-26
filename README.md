@@ -1,2 +1,2 @@
 # SteganographyApp
- Praktyczne wykorzystanie ukrywania informacji w plikach graficznych algorytmem Patchwork.
+ Praktyczne wykorzystanie ukrywania informacji w plikach graficznych algorytmem LSB.
