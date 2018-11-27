@@ -67,7 +67,8 @@ namespace SteganographyApp
         private void Image_drop_panel_MouseDown(object sender, MouseButtonEventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Filter = "Image files|*.bmp;*.png;*.jpg;*.png";
+            LSB_method.LSB_method engine = new LSB_method.LSB_method();
+            dlg.Filter = engine.Get_formats();
 
             var result = dlg.ShowDialog();
 
@@ -81,7 +82,7 @@ namespace SteganographyApp
             }
         }
 
-        private void Decrypt_button_Click(object sender, RoutedEventArgs e)
+        private async void Decrypt_button_ClickAsync(object sender, RoutedEventArgs e)
         {
             if (image_file == null)
             {
@@ -100,15 +101,21 @@ namespace SteganographyApp
 
             engine.Load(image_file);
             
-            string result = engine.Decrypt_text();
 
-            if (result == null)
+            string text_result = "";
+
+            await Task.Run(() =>
+            {
+                text_result = engine.Decrypt_text();
+            });
+
+            if (text_result == null)
             {
                 Raise_error("No message decrypted! Check source file, orientation and stop words.");
                 return;
             }
 
-            text_decrypted_textbox.Text = result;
+            text_decrypted_textbox.Text = text_result;
 
             Raise_success("Text decrypted to textbox.");
         }

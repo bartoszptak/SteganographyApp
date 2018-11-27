@@ -20,7 +20,7 @@
                     </StackPanel>
                     <TextBox x:Name="stop_words_textbox" Margin="515,202,10,286" BorderBrush="Goldenrod" materialDesign:HintAssist.Hint="Stop words (3 chars)" Foreground="#00653B" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" MaxLength="3"/>
 
-                    <Button x:Name="encrypt_button"  Margin="515,310,10,180" BorderBrush="Goldenrod" Background="#00653B" Content="Decrypt" Height="Auto" Click="Decrypt_button_Click"/>
+                    <Button x:Name="encrypt_button"  Margin="515,310,10,180" BorderBrush="Goldenrod" Background="#00653B" Content="Decrypt" Height="Auto" Click="Decrypt_button_ClickAsync"/>
                     <ToggleButton x:Name="orientation_togglebutton" Margin="515,259,0,235" HorizontalAlignment="Left" IsChecked="True" Background="#00653B" BorderBrush="Goldenrod" Style="{StaticResource MaterialDesignSwitchToggleButton}" Click="Orientation_togglebutton_Click"  />
                     <Label x:Name="orientation_label" Content="Horizontal" HorizontalAlignment="Left" Margin="554,259,0,0" Foreground="#00653B"  VerticalAlignment="Top" Height="46" Width="190" FontSize="24"/>
                     <TextBox x:Name="text_decrypted_textbox" Margin="27,365,10,58" BorderBrush="Goldenrod" materialDesign:HintAssist.Hint="Decrypted text" Foreground="#00653B" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" AcceptsReturn="True" IsReadOnly="True"/>

@@ -28,8 +28,9 @@ namespace SteganographyApp
             InitializeComponent();
         }
 
-        private byte[] binary_file = null;
         private Bitmap image_file = null;
+        private Bitmap image_result = null;
+        private byte[] file_to_encrypt = null;
 
         private void Load_image(string path)
         {
@@ -37,27 +38,18 @@ namespace SteganographyApp
             image_file = new Bitmap(path);
         }
 
-        private void Load_file(string path)
-        {
-            using (BinaryReader b = new BinaryReader(File.Open(path, FileMode.Open)))
-            {
-                int pos = 0;
-                int length = (int)b.BaseStream.Length;
-                binary_file = new byte[length];
-                while (pos < length)
-                {
-                    binary_file[pos / sizeof(byte)] = b.ReadByte();
-                    pos += sizeof(byte);
-                }
-            }
-            file_name_texbox.Text = System.IO.Path.GetFileName(path);
-
-        }
-
         private void Raise_error(string message)
         {
             error_texbox.Text = message;
             error_texbox.Visibility = Visibility.Visible;
+            error_texbox.Background = System.Windows.Media.Brushes.DarkRed;
+        }
+
+        private void Raise_success(string message)
+        {
+            error_texbox.Text = message;
+            error_texbox.Visibility = Visibility.Visible;
+            error_texbox.Background = System.Windows.Media.Brushes.DarkGreen;
         }
 
         private void Fall_error()
@@ -78,13 +70,31 @@ namespace SteganographyApp
         private void Image_drop_panel_MouseDown(object sender, MouseButtonEventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Filter = "Image files|*.jpeg;*.png;*.jpg;*.gif;*.png";
+            LSB_method.LSB_method engine = new LSB_method.LSB_method();
+            dlg.Filter = engine.Get_formats();
 
             var result = dlg.ShowDialog();
 
             if (result == true)
             {
                 Load_image(dlg.FileName);
+            }
+        }
+
+        private void Load_file(string path)
+        {
+            using (BinaryReader b = new BinaryReader(
+                    File.Open(path, FileMode.Open)))
+            {
+                int pos = 0;
+                int length = (int)b.BaseStream.Length;
+                byte[] res = new byte[length];
+                while (pos < length)
+                {
+                    res[pos / sizeof(byte)] = b.ReadByte();
+                    pos += sizeof(byte);
+                }
+                file_to_encrypt = res;
             }
         }
 
@@ -95,6 +105,7 @@ namespace SteganographyApp
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
 
                 Load_file(files[0]);
+                file_name_texbox.Text = files[0];
             }
         }
 
@@ -108,35 +119,82 @@ namespace SteganographyApp
             if (result == true)
             {
                 Load_file(dlg.FileName);
+                file_name_texbox.Text = dlg.FileName;
             }
         }
 
-
-
-        private void encrypt_button_Click(object sender, RoutedEventArgs e)
+        private void Encrypt_button_Click(object sender, RoutedEventArgs e)
         {
-            int seed;
-
-            if (!Int32.TryParse(seed_textbox.Text, out seed))
-            {
-                Raise_error("Seed must me integer number!");
-                return;
-            }
-            else if(binary_file == null)
-            {
-                Raise_error("Open binary file, please!");
-                return;
-            }
-            else if (image_file == null)
+            save_button.Visibility = Visibility.Hidden;
+            if (image_file == null)
             {
                 Raise_error("Open image file, please!");
                 return;
             }
+            else if (file_to_encrypt == null)
+            {
+                Raise_error("Open file to encrypt, please!");
+                return;
+            }
+            else if (stop_words_textbox.Text.Length != 3)
+            {
+                Raise_error("Lenght of stop words must be equals 3 characters!");
+                return;
+            }
 
 
-
-            // IF ALL OK
             Fall_error();
+            var engine = new LSB_method.LSB_method(stop_words_textbox.Text, orientation_togglebutton.IsChecked.Value);
+
+            engine.Load(image_file);
+            if (file_to_encrypt.Length * 8 > engine.Get_lenght_image() * 3 - 8)
+            {
+                Raise_error("Message is to long!");
+                return;
+            }
+            engine.Encrypt_bytes(file_to_encrypt);
+
+            image_result = engine.Get_image();
+            save_button.Visibility = Visibility.Visible;
+
+            Raise_success("Text encrypted in the image. Save it.");
+        }
+
+        private void Orientation_togglebutton_Click(object sender, RoutedEventArgs e)
+        {
+            if (orientation_label != null && orientation_togglebutton != null)
+            {
+                if (orientation_togglebutton.IsChecked.Value)
+                {
+                    orientation_label.Content = "Horizontal";
+                }
+                else
+                {
+                    orientation_label.Content = "Vertical";
+                }
+            }
+        }
+
+        private void Save_button_Click(object sender, RoutedEventArgs e)
+        {
+            LSB_method.LSB_method engine = new LSB_method.LSB_method();
+
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.Filter = engine.Get_formats();
+
+            var result = dlg.ShowDialog();
+
+            if (result == true)
+            {
+                engine.Save_in_path(image_result, dlg.FileName);
+
+                Raise_success("Save successful!");
+            }
+            else
+            {
+                Raise_error("Save error!");
+            }
+
 
         }
     }

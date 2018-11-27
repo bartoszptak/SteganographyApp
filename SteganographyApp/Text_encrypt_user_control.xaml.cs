@@ -70,7 +70,8 @@ namespace SteganographyApp
         private void Image_drop_panel_MouseDown(object sender, MouseButtonEventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Filter = "Image files|*.bmp;*.png;*.jpg;*.png";
+            LSB_method.LSB_method engine = new LSB_method.LSB_method();
+            dlg.Filter = engine.Get_formats();
 
             var result = dlg.ShowDialog();
 

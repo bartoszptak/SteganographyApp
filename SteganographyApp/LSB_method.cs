@@ -58,17 +58,17 @@ namespace LSB_method
             using (var ms = new MemoryStream())
             {
                 if (format == "bmp")
-                {
-                    image.Save(ms, ImageFormat.Bmp);
-                }
-                else if (format == "png")
-                {
-                    image.Save(ms, ImageFormat.Png);
-                }
-                else if(format == "jpg")
-                {
-                    image.Save(ms, ImageFormat.Jpeg);
-                }
+                 {
+                    image.Save(path, ImageFormat.Bmp);
+                 }
+                 else if (format == "png")
+                 {
+                     image.Save(path, ImageFormat.Png);
+                 }
+                 else if(format == "jpg")
+                 {
+                     image.Save(path, ImageFormat.Jpeg);
+                 }
             }
         }
 
