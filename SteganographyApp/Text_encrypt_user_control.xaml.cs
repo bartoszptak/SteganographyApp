@@ -114,8 +114,9 @@ namespace SteganographyApp
                 Raise_error("Message is to long!");
                 return;
             }
+            loading_image.Visibility = Visibility.Visible;
             engine.Encrypt_text(text_to_encrypt_textbox.Text);
-
+            loading_image.Visibility = Visibility.Hidden;
             image_result = engine.Get_image();
             save_button.Visibility = Visibility.Visible;
 

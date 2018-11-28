@@ -152,17 +152,19 @@ namespace SteganographyApp
             engine.Load(image_file);
             if (file_to_encrypt.Length * 8 > engine.Get_lenght_image() * 3 - 8)
             {
-                Raise_error("Message is to long!");
+                Raise_error("The file is too big!");
                 return;
             }
 
             string[] ex = file_name.Split('.');
+            loading_image.Visibility = Visibility.Visible;
             engine.Encrypt_bytes(file_to_encrypt, "."+ex[ex.Length-1]);
 
             image_result = engine.Get_image();
             save_button.Visibility = Visibility.Visible;
+            loading_image.Visibility = Visibility.Hidden;
 
-            Raise_success("Text encrypted in the image. Save it.");
+            Raise_success("File encrypted in the image. Save it.");
         }
 
         private void Orientation_togglebutton_Click(object sender, RoutedEventArgs e)

@@ -26,7 +26,7 @@
                 <Grid x:Name="cursor_grid" Margin="0 100 0 0" Background="Goldenrod" Width="10" HorizontalAlignment="Left" Height="60" VerticalAlignment="Top"/>
             </materialDesign:TransitioningContent>
 
-            <ListView x:Name="menu_list_view" Margin="0 100" Foreground="White" FontFamily="Champagne &amp; Limousines" FontSize="18" SelectionChanged="Menu_list_view_SelectionChanged" SelectedIndex="0">
+            <ListView x:Name="menu_list_view" Margin="0,100,0,0" Foreground="White" FontFamily="Champagne &amp; Limousines" FontSize="18" SelectionChanged="Menu_list_view_SelectionChanged" SelectedIndex="0">
                 <ListViewItem Height="60">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Home" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
@@ -57,10 +57,8 @@
                         <TextBlock Text="Exit" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
                     </StackPanel>
                 </ListViewItem>
-
             </ListView>
-
-            <StackPanel Margin="10,555,10,10" HorizontalAlignment="Center" Orientation="Horizontal">
+            <StackPanel Margin="54,516,32,10" HorizontalAlignment="Center" Orientation="Horizontal" Width="164">
                 <TextBlock Foreground="LightGray" FontFamily="Champagne &amp; Limousines" FontSize="26">
                     <TextBlock Margin="0 -8" Text="Bartosz Ptak" VerticalAlignment="Center" FontSize="20" FontFamily="Champagne &amp; Limousines"/>
                     <Button x:Name="github_button" Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="LightGray" Click="Github_button_Click">
@@ -68,6 +66,9 @@
                     </Button>
                 </TextBlock>
             </StackPanel>
+
+
+
 
         </Grid>
     </Grid>

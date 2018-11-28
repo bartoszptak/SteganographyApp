@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:gif="http://wpfanimatedgif.codeplex.com"
              xmlns:local="clr-namespace:SteganographyApp"
   mc:Ignorable="d" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -16,13 +17,14 @@
                     </Grid.Effect>
 
                     <StackPanel x:Name="image_drop_panel" Drop="Image_drop_panel_Drop" AllowDrop="true" MouseDown="Image_drop_panel_MouseDown" Margin="10,10,244,180">
-                        <Image x:Name="image_panel" Source="drop_image.png" Height="346"/>
+                        <Image x:Name="image_panel" Source="assets/drop_image.png" Height="346"/>
                     </StackPanel>
                     <TextBox x:Name="stop_words_textbox" Margin="515,202,10,286" BorderBrush="Goldenrod" materialDesign:HintAssist.Hint="Stop words (3 chars)" Foreground="#00653B" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" MaxLength="3"/>
                     <Button x:Name="open_file_button" Margin="10,383,515,107" BorderBrush="Goldenrod" Background="#00653B" Content="Drop file or open" Height="Auto" Drop="File_drop_panel_Drop" AllowDrop="true" Click="Open_file_button_Click"/>
                     <TextBox x:Name="file_name_texbox" Margin="244,383,244,105" Text="File name" BorderBrush="Goldenrod" Foreground="#00653B" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" IsReadOnly="True"/>
 
                     <Button x:Name="encrypt_button"  Margin="515,310,10,180" BorderBrush="Goldenrod" Background="#00653B" Content="Encrypt" Height="Auto" Click="Encrypt_button_Click"/>
+                    <Image x:Name="loading_image" gif:ImageBehavior.AnimatedSource="assets/load.gif" Margin="525,315,189,180" Width="40" Height="40" Visibility="Hidden"/>
                     <ToggleButton x:Name="orientation_togglebutton" Margin="515,259,0,235" HorizontalAlignment="Left" IsChecked="True" Background="#00653B" BorderBrush="Goldenrod" Style="{StaticResource MaterialDesignSwitchToggleButton}" Click="Orientation_togglebutton_Click"  />
                     <Label x:Name="orientation_label" Content="Horizontal" HorizontalAlignment="Left" Margin="554,259,0,0" Foreground="#00653B"  VerticalAlignment="Top" Height="46" Width="190" FontSize="24"/>
                     

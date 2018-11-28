@@ -101,6 +101,7 @@ namespace SteganographyApp
             Fall_error();
             var engine = new LSB_method.LSB_method(stop_words_textbox.Text, orientation_togglebutton.IsChecked.Value);
 
+            loading_image.Visibility = Visibility.Visible;
             engine.Load(image_file);
 
             
@@ -111,14 +112,16 @@ namespace SteganographyApp
                 final_result = engine.Decrypt_bytes();
             });
 
+            loading_image.Visibility = Visibility.Hidden;
             if (final_result == null)
             {
-                Raise_error("No message decrypted! Check source file, orientation and stop words.");
+                Raise_error("No file decrypted! Check source file, orientation and stop words.");
                 return;
             }
 
+            
             save_button.Visibility = Visibility.Visible;
-            Raise_success("Text decrypted to textbox.");
+            Raise_success("File type: " + final_result.Item2 +" decrypted. Save it!");
         }
 
         private void Orientation_togglebutton_Click(object sender, RoutedEventArgs e)

@@ -103,12 +103,12 @@ namespace SteganographyApp
             
 
             string text_result = "";
-
+            loading_image.Visibility = Visibility.Visible;
             await Task.Run(() =>
             {
                 text_result = engine.Decrypt_text();
             });
-
+            loading_image.Visibility = Visibility.Hidden;
             if (text_result == null)
             {
                 Raise_error("No message decrypted! Check source file, orientation and stop words.");
