@@ -171,8 +171,11 @@ namespace LSB_method
             Write_bool_array(array, offset);
         }
 
-        private void Encrypt(byte[] bytes_old)
+
+        public void Encrypt_text(string text_string)
         {
+            byte[] bytes_old = String_to_bytes(text_string);
+            
             byte[] end_point = Get_stop_bytes();
             byte[] bytes = new byte[bytes_old.Length + end_point.Length];
             Array.Copy(bytes_old, 0, bytes, 0, bytes_old.Length);
@@ -198,13 +201,6 @@ namespace LSB_method
                 Array.Copy(bytes, 3*i, local, 0, 1);
                 Preprocessing_before_writting(local, i*8);
             }
-        }
-
-
-        public void Encrypt_text(string text_string)
-        {
-            byte[] bytes = String_to_bytes(text_string);
-            Encrypt(bytes);
         }
 
         private string Bool_to_string(bool b)
@@ -279,13 +275,16 @@ namespace LSB_method
 
         }
 
-        private byte[] Decrypt()
+
+
+        public string Decrypt_text()
         {
+            byte[] final = null;
             byte[] result = new byte[0];
             byte[] stop = Get_stop_bytes();
             byte[] buffer;
 
-            for(int i=0; i<image_lenght-8; i += 8)
+            for (int i = 0; i < image_lenght - 8; i += 8)
             {
                 buffer = Get_bytes(i);
 
@@ -298,34 +297,31 @@ namespace LSB_method
                 {
                     if (Is_end(buffer[0], buffer[1], buffer[2]))
                     {
-                        return result;
+                        final = result;
+                        break;
                     }
                     else if (Is_end(result[result.Length - 1], buffer[0], buffer[1]))
                     {
-                        byte[] pre_result = new byte[result.Length-1];
+                        byte[] pre_result = new byte[result.Length - 1];
                         Array.Copy(result, 0, pre_result, 0, result.Length - 1);
-                        return pre_result;
+                        final = pre_result;
+                        break;
                     }
                     else if (Is_end(result[result.Length - 2], result[result.Length - 1], buffer[0]))
                     {
                         byte[] pre_result = new byte[result.Length - 2];
                         Array.Copy(result, 0, pre_result, 0, result.Length - 2);
-                        return pre_result;
+                        final= pre_result;
+                        break;
                     }
                 }
 
                 result = local;
             }
 
-            return null;
-        }
-
-        public string Decrypt_text()
-        {
-            byte[] local = Decrypt();
-            if(local != null)
+            if (final != null)
             {
-                return Bytes_to_string(local);
+                return Bytes_to_string(final);
             }
             else
             {
@@ -334,14 +330,114 @@ namespace LSB_method
             
         }
 
-        public byte[] Decrypt_bytes()
+        public Tuple<byte[], string> Decrypt_bytes()
         {
-            return Decrypt();
+            Tuple<byte[], string> final = null;
+            byte[] result = new byte[0];
+            byte[] stop = Get_stop_bytes();
+            byte[] buffer;
+
+            for (int i = 0; i < image_lenght - 8; i += 8)
+            {
+                buffer = Get_bytes(i);
+
+                byte[] local = new byte[result.Length + buffer.Length];
+                Array.Copy(result, 0, local, 0, result.Length);
+                Array.Copy(buffer, 0, local, result.Length, buffer.Length);
+
+
+                if (result.Length >= 3)
+                {
+                    if (Is_end(buffer[0], buffer[1], buffer[2]))
+                    {
+                        if(final == null)
+                        {
+                            final = new Tuple<byte[], string>(result, "");
+                        }
+                        else
+                        {
+                            byte[] extension = new byte[result.Length - final.Item1.Length - 3];
+                            Array.Copy(result, final.Item1.Length + 3, extension, 0, extension.Length);
+
+                            final = new Tuple<byte[], string>(final.Item1, Bytes_to_string(extension));
+                            break;
+                        }
+                        
+                    }
+                    else if (Is_end(result[result.Length - 1], buffer[0], buffer[1]))
+                    {
+                        if(final == null)
+                        {
+                            byte[] pre_result = new byte[result.Length - 1];
+                            Array.Copy(result, 0, pre_result, 0, result.Length - 1);
+                            final = new Tuple<byte[], string>(pre_result, "");
+
+                        }
+                        else
+                        {
+                            byte[] extension = new byte[result.Length - final.Item1.Length - 4];
+                            Array.Copy(result, final.Item1.Length + 3, extension, 0, extension.Length);
+
+                            final = new Tuple<byte[], string>(final.Item1, Bytes_to_string(extension));
+                            break;
+                        }
+                    }
+                    else if (Is_end(result[result.Length - 2], result[result.Length - 1], buffer[0]))
+                    {
+                        if(final == null)
+                        {
+                            byte[] pre_result = new byte[result.Length - 2];
+                            Array.Copy(result, 0, pre_result, 0, result.Length - 2);
+                            final = new Tuple<byte[], string>(pre_result, "");
+                        }
+                        else
+                        {
+                            byte[] extension = new byte[result.Length - final.Item1.Length -5];
+                            Array.Copy(result, final.Item1.Length + 3, extension, 0, extension.Length);
+
+                            final = new Tuple<byte[], string>(final.Item1, Bytes_to_string(extension));
+                            break;
+                        }
+                    }
+                }
+
+                result = local;
+            }
+
+            return final;
         }
 
-        public void Encrypt_bytes(byte[] bytes)
+        public void Encrypt_bytes(byte[] bytes_old, string ext)
         {
-            Encrypt(bytes);
+            byte[] end_point = Get_stop_bytes();
+            byte[] file_ex = String_to_bytes(ext);
+            byte[] bytes = new byte[bytes_old.Length + 2*end_point.Length + file_ex.Length];
+            Array.Copy(bytes_old, 0, bytes, 0, bytes_old.Length);
+            Array.Copy(end_point, 0, bytes, bytes_old.Length, end_point.Length);
+
+            Array.Copy(file_ex, 0, bytes, bytes_old.Length+end_point.Length, file_ex.Length);
+            Array.Copy(end_point, 0, bytes, bytes_old.Length + end_point.Length + file_ex.Length, end_point.Length);
+
+            int len = bytes.Length / 3;
+            int i = 0;
+            for (i = 0; i < len; i++)
+            {
+                byte[] local = new byte[3];
+                Array.Copy(bytes, 3 * i, local, 0, 3);
+                Preprocessing_before_writting(local, i * 8);
+            }
+            if (bytes.Length - (len * 3) == 2)
+            {
+                byte[] local = new byte[2];
+                Array.Copy(bytes, 3 * i, local, 0, 2);
+                Preprocessing_before_writting(local, i * 8);
+            }
+            else if (bytes.Length - (len * 3) == 1)
+            {
+                byte[] local = new byte[1];
+                Array.Copy(bytes, 3 * i, local, 0, 1);
+                Preprocessing_before_writting(local, i * 8);
+            }
         }
 
         public Tuple<int, int> Get_shape_image()

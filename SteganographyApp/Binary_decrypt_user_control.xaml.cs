@@ -31,7 +31,7 @@ namespace SteganographyApp
 
 
         private Bitmap image_file = null;
-        private byte[] byte_result = null;
+        private Tuple<byte[],string> final_result = null;
 
         private void Load_image(string path)
         {
@@ -108,10 +108,10 @@ namespace SteganographyApp
 
             await Task.Run(() =>
             {
-                byte_result = engine.Decrypt_bytes();
+                final_result = engine.Decrypt_bytes();
             });
 
-            if (byte_result == null)
+            if (final_result == null)
             {
                 Raise_error("No message decrypted! Check source file, orientation and stop words.");
                 return;
@@ -140,7 +140,7 @@ namespace SteganographyApp
         {
             using (var fs = new FileStream(path, FileMode.Create, FileAccess.Write))
             {
-                fs.Write(byte_result, 0, byte_result.Length);               
+                fs.Write(final_result.Item1, 0, final_result.Item1.Length);               
             }
         }
 
@@ -149,7 +149,7 @@ namespace SteganographyApp
             LSB_method.LSB_method engine = new LSB_method.LSB_method();
 
             SaveFileDialog dlg = new SaveFileDialog();
-           // dlg.Filter = 
+            dlg.Filter = "File |*" + final_result.Item2;
 
             var result = dlg.ShowDialog();
 

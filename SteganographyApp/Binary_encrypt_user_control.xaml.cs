@@ -31,6 +31,7 @@ namespace SteganographyApp
         private Bitmap image_file = null;
         private Bitmap image_result = null;
         private byte[] file_to_encrypt = null;
+        private string file_name = "";
 
         private void Load_image(string path)
         {
@@ -95,8 +96,10 @@ namespace SteganographyApp
                     pos += sizeof(byte);
                 }
                 file_to_encrypt = res;
-            }
-        }
+                file_name = path;
+
+    }
+}
 
         private void File_drop_panel_Drop(object sender, DragEventArgs e)
         {
@@ -152,7 +155,9 @@ namespace SteganographyApp
                 Raise_error("Message is to long!");
                 return;
             }
-            engine.Encrypt_bytes(file_to_encrypt);
+
+            string[] ex = file_name.Split('.');
+            engine.Encrypt_bytes(file_to_encrypt, "."+ex[ex.Length-1]);
 
             image_result = engine.Get_image();
             save_button.Visibility = Visibility.Visible;
