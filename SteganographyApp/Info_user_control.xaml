@@ -15,8 +15,6 @@
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"  Height="40" Background="#00653B">
@@ -24,43 +22,35 @@
                         <Button Uid="0" Width="382" Content="Some informations about this application" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Goldenrod"/>
                     </StackPanel>
                 </Grid>
-                
-                <Grid Grid.Row="1" Grid.Column="0" Height="500" Background="#FFF3F3F3" Margin="10">
-                    <Grid.Effect>
-                        <DropShadowEffect BlurRadius="20" Color="#00653B" ShadowDepth="1"/>
-                    </Grid.Effect>
 
-                    <StackPanel Width="200">
-                        <TextBlock Margin="10" FontFamily="Showcard Gothic" FontSize="18" Text="Info" Foreground="#00653B"/>
-                        <TextBlock FontSize="12" Margin="5" TextWrapping="Wrap" FontFamily="Champagne &amp; Limousines">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vitae est vel turpis hendrerit vulputate. In eleifend, nunc eu egestas.
-                        </TextBlock>
-                    </StackPanel>
-                </Grid>
                 <Grid Grid.Row="1"  Grid.Column="1" Height="500" Background="#FFF3F3F3" Margin="10">
                     <Grid.Effect>
                         <DropShadowEffect BlurRadius="20" Color="#00653B" ShadowDepth="1"/>
                     </Grid.Effect>
 
-                    <StackPanel Width="200">
-                        <TextBlock Margin="10" FontFamily="Showcard Gothic" FontSize="18" Text="Algorithm" Foreground="#00653B"/>
-                        <TextBlock FontSize="12" Margin="5" TextWrapping="Wrap" FontFamily="Champagne &amp; Limousines">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vitae est vel turpis hendrerit vulputate. In eleifend, nunc eu egestas.
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <StackPanel Width="300">
+                        <TextBlock Margin="10" FontFamily="Showcard Gothic" FontSize="18" Text="algorithm lsb" Foreground="#00653B"/>
+                        <TextBlock FontSize="12" Margin="5" TextWrapping="Wrap" FontFamily="Champagne &amp; Limousines" TextAlignment="Justify">
+                            The LSB is the most important bit in the byte value of the image pixel. The LSB based image steganography embeds the secret in the least significant bits of pixel values of the cover image (CVR).
                         </TextBlock>
-                    </StackPanel>
-                </Grid>
-                <Grid Grid.Row="1"  Grid.Column="2" Height="500" Background="#FFF3F3F3" Margin="10">
-                    <Grid.Effect>
-                        <DropShadowEffect BlurRadius="20" Color="#00653B" ShadowDepth="1"/>
-                    </Grid.Effect>
+                        <TextBlock FontSize="12" Margin="5" TextWrapping="Wrap" FontFamily="Champagne &amp; Limousines" TextAlignment="Justify">
+                            The concept of LSB Embedding is simple. It exploits the fact of the level of precision in many formats is far greater than that perceivable by average human vision. Therefore, an altered image with few variations in its colors
+will be indistinguishable from the original by a human being, just by looking at it. In conventional LSB technique, which requires eight bytes of pixels to store 1byte of secret data but in proposed LSB technique, just four bytes of pixels
+are sufficient to hold one message byte. Rest of the bits in the pixels remains the same.</TextBlock>
 
-                    <StackPanel Width="200">
-                        <TextBlock Margin="10" FontFamily="Showcard Gothic" FontSize="18" Text="Author" Foreground="#00653B"/>
-                        <TextBlock FontSize="12" Margin="5" TextWrapping="Wrap" FontFamily="Champagne &amp; Limousines">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vitae est vel turpis hendrerit vulputate. In eleifend, nunc eu egestas.
-                        </TextBlock>
+                        <TextBlock FontSize="12" Margin="5" TextWrapping="Wrap" HorizontalAlignment="Right" FontFamily="Champagne &amp; Limousines">
+                            Source: ISSN:2319-7900</TextBlock>
                     </StackPanel>
                 </Grid>
+                    <Grid Grid.Column="1">
+                        <Image Source="assets/tables.PNG" Width="300" Margin="38,0,39,54" />
+                    </Grid>
+            </Grid>
             </Grid>
         </materialDesign:TransitioningContent>
     </Grid>
