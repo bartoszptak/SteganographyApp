@@ -24,6 +24,8 @@ namespace SteganographyApp
         public MainWindow()
         {
             InitializeComponent();
+            principal_grid.Children.Clear();
+            principal_grid.Children.Add(new Main_user_control());
         }
 
 
@@ -43,6 +45,7 @@ namespace SteganographyApp
             {
                 case 0:
                     principal_grid.Children.Clear();
+                    principal_grid.Children.Add(new Main_user_control());
                     break;
 
                 case 1:
@@ -72,7 +75,7 @@ namespace SteganographyApp
 
         private void Github_button_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("http://github.com/bartoszptak");
+            System.Diagnostics.Process.Start("https://github.com/bartoszptak");
         }
     }
 }
