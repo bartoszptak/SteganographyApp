@@ -16,7 +16,7 @@ namespace LSB_method
         private long image_lenght;
         private readonly string stop_bytes;
         private readonly bool isHorizontal;
-        private readonly string formats = "Image files|*.bmp;*.png;*.jpg";
+        private readonly string formats = "Image files|*.bmp;*.png";
 
         public LSB_method(string stop, bool isHorizontal)
         {
