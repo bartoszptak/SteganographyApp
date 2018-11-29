@@ -1,7 +1,7 @@
 # Steganography App
-### Practical use of hiding information in graphic files with the LSB algorithm.
+Practical use of hiding information in graphic files with the LSB algorithm.
 
-## Some examples
+# Some examples:
 ### Encrypting text message in image with stop words "\<S>" and horizontal orientation
 ![Text encrypt](/readme_files/01_text_encrypt.png)
  
