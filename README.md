@@ -2,10 +2,10 @@
 ### Practical use of hiding information in graphic files with the LSB algorithm.
 
 ## Some examples
-### Encrypting text message in image with stop words "<S>" and horizontal orientation
+### Encrypting text message in image with stop words "\<S>" and horizontal orientation
 ![Text encrypt](/readme_files/01_text_encrypt.png)
  
- ### Decrypting text message from image with stop words "<S>" and horizontal orientation
+ ### Decrypting text message from image with stop words "\<S>" and horizontal orientation
 ![Text decrypt](/readme_files/02_text_decrypt.png)
  
  ### Encrypting binary file in image with stop words "^_^" and vertical orientation
