@@ -84,13 +84,13 @@ namespace LSB_method
 
         private byte[] String_to_bytes(string text)
         {
-            return Encoding.ASCII.GetBytes(text);
+            return Encoding.UTF8.GetBytes(text);
         }
 
         private string Bytes_to_string(byte[] bytes)
         {
             
-            return Encoding.ASCII.GetString(bytes);
+            return Encoding.UTF8.GetString(bytes);
         }
 
         private bool[] Bytes_to_bool_array(byte[] bytes)
